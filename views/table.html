@@ -12,9 +12,11 @@
     <meta name="keywords" content="au theme template" />
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>ESHOT | Data</title>
 
     <!-- Fontfaces CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css"> 
     <link href="css/font-face.css" rel="stylesheet" media="all" />
     <link
       href="vendor/font-awesome-4.7/css/font-awesome.min.css"
@@ -66,6 +68,7 @@
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all" />
+    <script src="./script.js"></script>
   </head>
 
   <body class="animsition">
@@ -92,9 +95,6 @@
               <li class="active has-sub">
                 <a href="/table"> <i class="fas fa-table"></i>Tables</a>
               </li>
-              <li>
-                <a href="/map"> <i class="fas fa-map-marker-alt"></i>Maps</a>
-              </li>
             </ul>
           </nav>
         </div>
@@ -111,7 +111,7 @@
             </div>
           </div>
         </header>
-        <!-- HEADER DESKTOP-->
+        <!-- END HEADER DESKTOP-->
 
         <!-- MAIN CONTENT-->
         <div class="main-content">
@@ -119,27 +119,59 @@
             <div class="container-fluid">
               <div class="row">
                 <div class="col-md-12">
-                  <div class="copyright">
-                    <p>
-                      Mkaragoz © 2023 Mkaragoz. All rights reserved. Template by
-                    </p>
+                  <div class="card-body">
+                    <table id="reservationTable" class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th>Hat Numarası</th>
+                          <th>Hat İsmi</th>
+                          <th>İlçe ID</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
                   </div>
+                </div>  
+                <div class="container">
+                  <form id="hatEkleForm" action="/table/submit" method="post">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="hatNumarasi">Hat Numarası:</label>
+                          <input type="text" class="form-control" id="hatNumarasi" name="hatNumarasi" placeholder="Hat numarasını girin" required>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="hatIsmi">Hat İsmi:</label>
+                          <input type="text" class="form-control" id="hatIsmi" name="hatIsmi" placeholder="Hat ismini girin" required>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="ilceId">İlçe ID:</label>
+                          <input type="text" class="form-control" id="ilceId" name="ilceId" placeholder="İlçe ID'yi girin" required>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-primary" style="margin-top: 32px;">Hat Ekle</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <!-- END MAIN CONTENT-->
-        <!-- END PAGE CONTAINER-->
-      </div>
-    </div>
+    </div>  
 
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <!-- Bootstrap JS-->
     <script src="vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
+    <!-- Vendor JS -->
     <script src="vendor/slick/slick.min.js"></script>
     <script src="vendor/wow/wow.min.js"></script>
     <script src="vendor/animsition/animsition.min.js"></script>
@@ -151,8 +183,33 @@
     <script src="vendor/chartjs/Chart.bundle.min.js"></script>
     <script src="vendor/select2/select2.min.js"></script>
 
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script> 
     <!-- Main JS-->
     <script src="js/main.js"></script>
+
+    <script>
+      // API'den veri çekme ve DataTable oluşturma
+      $(document).ready(function () {
+        $.ajax({
+          url: "http://localhost:3000/api/hat", // API endpoint'i
+          method: "GET",
+          success: function (data) {
+            // DataTables kullanarak tabloyu oluştur
+            $("#reservationTable").DataTable({
+              data: data.message,
+              columns: [
+                { data: "h_id", title: "Hat Numarası" }, // API'den gelen veri yapısına uygun olarak güncellendi
+                { data: "h_ad", title: "Hat İsmi" }, // API'den gelen veri yapısına uygun olarak güncellendi
+                { data: "ilce_id", title: "İlçe ID" }, // API'den gelen veri yapısına uygun olarak güncellendi
+              ],
+            })
+          },error:function (jqXHR, textStatus, errorThrown) {
+            console.error("API isteği başarısız oldu:", textStatus, errorThrown);
+          }
+        });
+      });
+    </script>
   </body>
 </html>
 <!-- end document-->
