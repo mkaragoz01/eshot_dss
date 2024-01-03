@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         data.message[0].nufus
       ) {
         document.getElementById("nufus_baslik").innerHTML =
-          data.message[0].nufus;
+          data.message[0].nufus / 1000000;
       } else {
         console.error("Hata: Beklenen veri bulunamadı.");
         document.getElementById("nufus_baslik").innerHTML = "Veri alınamadı";
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
         data.message[0].yolcu
       ) {
         document.getElementById("yolcu_baslik").innerHTML =
-          data.message[0].yolcu;
+          data.message[0].yolcu / 1000000;
       } else {
         console.error("Hata: Beklenen veri bulunamadı.");
         document.getElementById("yolcu_baslik").innerHTML = "Veri alınamadı";

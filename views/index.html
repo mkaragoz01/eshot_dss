@@ -13,6 +13,38 @@
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all" />
+    <style>
+      .dashboard-container {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+      .dashboard-box {
+        width: 900px;
+        height: 600px;
+        padding: 40px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 1%;
+        background-color: rgb(255, 255, 255);
+      }
+      #box3 {
+        position: relative;
+      }
+
+      #myChart3 {
+        margin: auto;
+        width: 1500px;
+      }
+
+      #myChart6 {
+        margin: auto;
+        width: 500px;
+      }
+    </style>
     <link
       href="vendor/font-awesome-4.7/css/font-awesome.min.css"
       rel="stylesheet"
@@ -188,68 +220,37 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="au-card recent-report">
-                    <div class="au-card-inner">
-                      <h3 class="title-2">recent reports</h3>
-                      <div class="chart-info">
-                        <div class="chart-info__left">
-                          <div class="chart-note">
-                            <span class="dot dot--blue"></span>
-                            <span>products</span>
-                          </div>
-                          <div class="chart-note mr-0">
-                            <span class="dot dot--green"></span>
-                            <span>services</span>
-                          </div>
-                        </div>
-                        <div class="chart-info__right">
-                          <div class="chart-statis">
-                            <span class="index incre">
-                              <i class="zmdi zmdi-long-arrow-up"></i>25%</span
-                            >
-                            <span class="label">products</span>
-                          </div>
-                          <div class="chart-statis mr-0">
-                            <span class="index decre">
-                              <i class="zmdi zmdi-long-arrow-down"></i>10%</span
-                            >
-                            <span class="label">services</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="recent-report__chart">
-                        <canvas id="recent-rep-chart"></canvas>
-                      </div>
-                    </div>
-                  </div>
+              <div class="dashboard-container">
+                <div class="dashboard-box" id="box1">
+                  <h3>Kullanım Oranı En Fazla Artan Hatlar</h3>
+                  <canvas id="myChart1" width="250" height="150"></canvas>
                 </div>
-                <div class="col-lg-6">
-                  <div class="au-card chart-percent-card">
-                    <div class="au-card-inner">
-                      <h3 class="title-2 tm-b-5">char by %</h3>
-                      <div class="row no-gutters">
-                        <div class="col-xl-6">
-                          <div class="chart-note-wrap">
-                            <div class="chart-note mr-0 d-block">
-                              <span class="dot dot--blue"></span>
-                              <span>products</span>
-                            </div>
-                            <div class="chart-note mr-0 d-block">
-                              <span class="dot dot--red"></span>
-                              <span>services</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-xl-6">
-                          <div class="percent-chart">
-                            <canvas id="percent-chart"></canvas>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+
+                <div class="dashboard-box" id="box2">
+                  <h3>Nüfusu En Kalabalık İlçeler</h3>
+                  <canvas id="myChart2" style="margin: auto"></canvas>
+                </div>
+              </div>
+              <div class="dashboard-container">
+                <div class="dashboard-box" id="box3">
+                  <h3>Hareket Saati En Fazla Olan Hatlar</h3>
+                  <canvas id="myChart3"></canvas>
+                </div>
+
+                <div class="dashboard-box" id="box4">
+                  <h3>Nüfus Artış Oranı En Fazla Olan İlçeler</h3>
+                  <canvas id="myChart4"></canvas>
+                </div>
+              </div>
+              <div class="dashboard-container">
+                <div class="dashboard-box" id="box5">
+                  <h3>Nüfus Artış Oranı En Az Olan İlçeler</h3>
+                  <canvas id="myChart5"></canvas>
+                </div>
+
+                <div class="dashboard-box" id="box6">
+                  <h3>Hareket Saati En Az Olan Hatlar</h3>
+                  <canvas id="myChart6"></canvas>
                 </div>
               </div>
             </div>
