@@ -524,3 +524,68 @@ exports.chart6 = (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+exports.chart7 = (req, res) => {
+  try {
+    dbConn.query(
+      "SELECT ilceler.ilce_ad as ad,AVG(yillik_yolcu.y2021) as nufus\
+      FROM ilceler,yillik_yolcu,hatlar\
+      WHERE ilceler.ilce_id=hatlar.ilce_id AND yillik_yolcu.h_id=hatlar.h_id\
+      GROUP BY ilceler.ilce_id",
+      (error, results) => {
+        if (error) {
+          console.error("MySQL connection error:", error);
+          return res.status(500).json({ error: "Internal Server Error" });
+        }
+
+        const labels = results.map((result) => result.ad);
+        const dataValues = results.map((result) => result.nufus);
+        const data = {
+          labels: labels,
+          datasets: [
+            {
+              data: dataValues,
+              backgroundColor: [
+                "rgb(255, 99, 132)",
+                "rgb(75, 192, 192)",
+                "rgb(255, 205, 86)",
+                "rgb(201, 203, 207)",
+                "rgb(54, 162, 235)",
+                "rgb(255, 0, 0)",
+                "rgb(0, 255, 0)",
+                "rgb(0, 0, 255)",
+                "rgb(128, 0, 128)",
+                "rgb(255, 165, 0)",
+                "rgb(0, 128, 0)",
+                "rgb(128, 128, 0)",
+                "rgb(0, 128, 128)",
+                "rgb(128, 0, 0)",
+                "rgb(0, 0, 128)",
+                "rgb(255, 140, 0)",
+                "rgb(139, 0, 139)",
+                "rgb(0, 100, 0)",
+                "rgb(255, 69, 0)",
+                "rgb(0, 255, 255)",
+                "rgb(255, 20, 147)",
+                "rgb(0, 191, 255)",
+                "rgb(255, 215, 0)",
+                "rgb(0, 255, 127)",
+                "rgb(255, 192, 203)",
+                "rgb(70, 130, 180)",
+                "rgb(240, 128, 128)",
+                "rgb(0, 255, 0)",
+                "rgb(255, 255, 0)",
+              ],
+              hoverOffset: 4,
+            },
+          ],
+        };
+
+        res.json(data);
+      }
+    );
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};

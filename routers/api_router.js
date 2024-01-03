@@ -17,6 +17,7 @@ const {
   chart4,
   chart5,
   chart6,
+  chart7,
 } = require("../controllers/api_controller");
 
 router.get("/hat_saat", getHat_saatleri);
@@ -37,5 +38,6 @@ router.get("/chart3", chart3);
 router.get("/chart4", chart4);
 router.get("/chart5", chart5);
 router.get("/chart6", chart6);
+router.get("/chart7", chart7);
 
 module.exports = router;

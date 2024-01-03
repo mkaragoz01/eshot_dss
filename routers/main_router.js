@@ -13,4 +13,10 @@ router.get("/table", (req, res) => {
 
 router.post("/table/submit", postHat);
 
+router.get("/calc", (req, res) => {
+  res.sendFile(path.join(__dirname, "../views", "calc.html"));
+});
+
+router.post("/calc/submit");
+
 module.exports = router;
