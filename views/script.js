@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
           );
 
           sonuc.datasets[1].data = sonuc.datasets[1].data.map((value) =>
-            Math.round(value * (1 + yuzde / 100))
+            Math.round(value * (1 + yuzde / 1000))
           );
 
           // Grafiği alalım
