@@ -114,3 +114,89 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("baglantili_baslik").innerHTML = "Veri alınamadı";
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("calc_btn").addEventListener("click", function () {
+    // Input alanından yüzde değerini alalım
+    var yuzde = document.getElementById("calc_input").value;
+    console.log(yuzde);
+    // Girilen değerin geçerli bir sayı olup olmadığını kontrol edelim
+    if (!isNaN(yuzde)) {
+      // Fetch isteği yaparak yeni verileri alalım
+      fetch("http://localhost:3000/api/chart7")
+        .then((response) => response.json())
+        .then((sonuc) => {
+          // Verileri yüzdeye göre arttıralım
+          sonuc.datasets[0].data = sonuc.datasets[0].data.map(
+            (value) => value * (1 + yuzde / 100)
+          );
+
+          sonuc.datasets[1].data = sonuc.datasets[1].data.map((value) =>
+            Math.round(value * (1 + yuzde / 100))
+          );
+
+          // Grafiği alalım
+          var ctx = document.getElementById("calc_chart").getContext("2d");
+
+          // Mevcut grafiği temizleyelim
+          if (window.myChart) {
+            window.myChart.destroy();
+          }
+
+          // Yeni verileri ekleyerek veya güncelleyerek grafiği oluşturalım
+          window.myChart = new Chart(ctx, {
+            type: "radar",
+            data: sonuc,
+            options: {
+              maintainAspectRatio: false,
+              legend: {
+                display: false,
+              },
+              responsive: true,
+              scales: {
+                xAxes: [
+                  {
+                    gridLines: {
+                      drawOnChartArea: true,
+                      color: "#f2f2f2",
+                    },
+                    ticks: {
+                      fontFamily: "Poppins",
+                      fontSize: 12,
+                    },
+                  },
+                ],
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true,
+                      maxTicksLimit: 5,
+                      stepSize: 50,
+                      max: 50,
+                      fontFamily: "Poppins",
+                      fontSize: 12,
+                    },
+                    gridLines: {
+                      display: true,
+                      color: "#f2f2f2",
+                    },
+                  },
+                ],
+              },
+              elements: {
+                point: {
+                  radius: 0,
+                  hitRadius: 10,
+                  hoverRadius: 4,
+                  hoverBorderWidth: 3,
+                },
+              },
+            },
+          });
+        })
+        .catch((error) => console.error("Fetch Hatası:", error));
+    } else {
+      alert("Lütfen geçerli bir yüzde değeri girin");
+    }
+  });
+});

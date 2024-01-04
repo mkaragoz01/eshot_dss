@@ -17,6 +17,4 @@ router.get("/calc", (req, res) => {
   res.sendFile(path.join(__dirname, "../views", "calc.html"));
 });
 
-router.post("/calc/submit");
-
 module.exports = router;

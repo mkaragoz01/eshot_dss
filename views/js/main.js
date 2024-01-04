@@ -564,7 +564,7 @@
     .then((sonuc) => {
       var ctx = document.getElementById("calc_chart").getContext("2d");
       new Chart(ctx, {
-        type: "doughnut",
+        type: "radar",
         data: sonuc,
         options: {
           maintainAspectRatio: false,

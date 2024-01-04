@@ -13,7 +13,7 @@ exports.postHat = (req, res) => {
   dbConn.query(sql, values, (err, result) => {
     if (err) {
       console.error("MySQL hatası: " + err.message);
-      res.status(500).send("Veri kaydetme hatası");
+      res.status(500).send("Veri kaydetme hatası: " + err.sqlMessage);
       return;
     }
     res.redirect("/table");
