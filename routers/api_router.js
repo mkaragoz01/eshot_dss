@@ -4,6 +4,7 @@ const {
   getHat_saatleri,
   getHat,
   getHat_sayi,
+  getIlceler,
   getBoxChart1,
   getBoxChart2,
   getBoxChart3,
@@ -26,6 +27,7 @@ router.get("/hat_sayi", getHat_sayi);
 router.get("/sehir_nufus", getSehir_nufus);
 router.get("/top_kullanim", getTop_kullanim);
 router.get("/baglantili", getBaglantili);
+router.get("/ilceler", getIlceler);
 
 router.get("/box_chart", getBoxChart1);
 router.get("/box_chart2", getBoxChart2);

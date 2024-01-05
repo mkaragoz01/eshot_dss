@@ -200,3 +200,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  // API endpoint'i
+  var apiUrl = "http://localhost:3000/api/ilceler";
+
+  // İlçelerin bulunduğu select elementi
+  var ilceSelect = document.getElementById("ilceId");
+
+  // API'den veri çekme işlemi
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      // İlçe verilerini select elementine ekle
+      data.message.forEach(function (ilce) {
+        var option = document.createElement("option");
+        option.text = ilce.ilce;
+        option.value = ilce.ilce;
+        ilceSelect.add(option);
+      });
+    })
+    .catch((error) => console.error("Veri çekme hatası:", error));
+});

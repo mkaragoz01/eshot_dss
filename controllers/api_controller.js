@@ -108,6 +108,25 @@ exports.getBaglantili = (req, res) => {
   }
 };
 
+exports.getIlceler = (req, res) => {
+  try {
+    dbConn.query(
+      "SELECT ilceler.ilce_ad as ilce FROM ilceler",
+      (error, results) => {
+        if (error) {
+          console.error("MySQL connection error:", error);
+          res.status(500).json({ error: "Internal Server Error" });
+          return;
+        }
+        res.json({ message: results });
+      }
+    );
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 exports.getBoxChart1 = (req, res) => {
   try {
     dbConn.query(
