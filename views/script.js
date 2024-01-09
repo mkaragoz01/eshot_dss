@@ -43,8 +43,11 @@ document.addEventListener("DOMContentLoaded", function () {
         data.message.length > 0 &&
         data.message[0].nufus
       ) {
-        document.getElementById("nufus_baslik").innerHTML =
-          data.message[0].nufus / 1000000;
+        var nufus = data.message[0].nufus;
+
+        var new_nufus = nufus.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        document.getElementById("nufus_baslik").innerHTML = new_nufus;
       } else {
         console.error("Hata: Beklenen veri bulunamadı.");
         document.getElementById("nufus_baslik").innerHTML = "Veri alınamadı";
@@ -72,8 +75,9 @@ document.addEventListener("DOMContentLoaded", function () {
         data.message.length > 0 &&
         data.message[0].yolcu
       ) {
-        document.getElementById("yolcu_baslik").innerHTML =
-          data.message[0].yolcu / 1000000;
+        var yolcu = data.message[0].yolcu;
+        var new_yolcu = yolcu.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById("yolcu_baslik").innerHTML = new_yolcu;
       } else {
         console.error("Hata: Beklenen veri bulunamadı.");
         document.getElementById("yolcu_baslik").innerHTML = "Veri alınamadı";
